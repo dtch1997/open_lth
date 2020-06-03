@@ -70,6 +70,8 @@ class LotteryDesc(Desc):
             pruning_hparams = pruning.registry.get_pruning_hparams(pruning_strategy)
             if defaults and defaults.pruning_hparams.pruning_strategy == pruning_strategy:
                 def_ph = defaults.pruning_hparams
+            else: 
+                def_ph = None
         else:
             pruning_hparams = hparams.PruningHparams
             def_ph = None

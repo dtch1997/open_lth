@@ -45,7 +45,7 @@ class Strategy(base.Strategy):
         # Daniel: Make a copy of the mask so that the old mask isn't changed. 
         # I don't know if this is strictly necessary but it's better to be safe. 
         new_mask_dict = {k: np.copy(v) for k,v in current_mask.items()}
-        for k, v in new_mask_dict:
+        for k, v in new_mask_dict.items():
             if k in prunable_tensors: continue
             
             # Determine the number of remaining prunable weights

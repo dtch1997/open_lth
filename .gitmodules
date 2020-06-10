@@ -1,0 +1,3 @@
+[submodule "RandWireNN"]
+	path = RandWireNN
+	url = https://github.com/leaderj1001/RandWireNN

@@ -93,6 +93,11 @@ class Model(base.Model):
 
         components = model_name.split('_')
         _, _, graph_mode, node_num, p, base_channels, graph_seed = components 
+        base_channels = int(base_channels)
+        node_num = int(node_num)
+        p = float(p)
+        graph_seed = int(graph_seed)
+        
         layer_types = ['cv', 'cv', 'rw', 'rw']
         channels = [base_channels, base_channels, base_channels * 2, base_channels * 4]
         plan = (layer_types, node_num, p, channels, graph_mode, graph_seed)

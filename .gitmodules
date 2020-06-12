@@ -1,0 +1,4 @@
+[submodule "RandWireNN"]
+	path = RandWireNN
+	url = http://github.com/dtch1997/RandWireNN
+	branch = master

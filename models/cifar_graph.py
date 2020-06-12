@@ -76,7 +76,7 @@ class Model(base.Model):
                 components[1] == "graph" and
                 components[2] in ['er', 'ws', 'ba'] and
                 components[3].isdigit() and
-                isfloat(components[4]) and (0 < float(components[3]) < 1) and
+                isfloat(components[4]) and (0 < float(components[4]) < 1) and
                 components[5].isdigit() and
                 components[6].isdigit())
 

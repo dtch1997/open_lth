@@ -21,7 +21,7 @@ class Model(base.Model):
         layers = []
         filters = 3
         layer_types, node_num, p, channels, graph_mode, seed = plan
-        for i, spec in enumerate(layer_types):
+        for i, layer_type in enumerate(layer_types):
             if layer_type == 'cv':
                 layer = nn.Sequential(
                     nn.Conv2d(in_channels=filters, out_channels=channels[i], kernel_size=3, padding=1),

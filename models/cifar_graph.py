@@ -36,7 +36,7 @@ class Model(base.Model):
                 layer = RandWire(node_num, p, filters, channels[i], graph_mode, True, name=f"RandWire_{i}", graph_seed = seed)
             else:
                 raise ValueError("layer_type must be one of 'cv' or 'rw'")
-            filters = channels
+            filters = channels[i]
             layers.append(layer)
                 
         # Top off with a 1x1 convolution

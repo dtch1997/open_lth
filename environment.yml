@@ -22,9 +22,12 @@ dependencies:
   - xz=5.2.5=h7b6447c_0
   - zlib=1.2.11=h7b6447c_3
   - pip:
+    - decorator==4.4.2
     - future==0.18.2
+    - networkx==2.4
     - numpy==1.18.4
     - pillow==7.1.2
+    - pyyaml==5.3.1
     - torch==1.5.0
     - torchvision==0.6.0
 prefix: /home/dtch1997/.conda/envs/lth

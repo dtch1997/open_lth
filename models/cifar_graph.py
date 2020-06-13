@@ -3,6 +3,7 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
@@ -10,6 +11,7 @@ from foundations import hparams
 from lottery.desc import LotteryDesc
 from models import base
 from pruning import sparse_global
+from randwire import RandWire
 
 
 class Model(base.Model):
@@ -25,7 +27,7 @@ class Model(base.Model):
             if layer_type == 'cv':
                 layer = nn.Sequential(
                     nn.Conv2d(in_channels=filters, out_channels=channels[i], kernel_size=3, padding=1),
-                    nn.BatchNorm2d(channels),
+                    nn.BatchNorm2d(channels[i]),
                     # Daniel: There is an extra ReLU() here in the last layer compared to leaderj1001's implementation. 
                     # As far as I can tell, this is because his RandWire Unit() implements:
                     #     ReLU -> Conv -> BatchNorm -> Dropout
@@ -52,7 +54,7 @@ class Model(base.Model):
     def forward(self, x):
         x = self.layers(x)
         batch, channels, height, width = x.size()
-        x = F.avgpool2d(x, kernel_size=[height_width])
+        x = F.avg_pool2d(x, kernel_size=[height, width])
         x = torch.squeeze(x)
         x = self.fc(x)
         return x
@@ -74,7 +76,7 @@ class Model(base.Model):
         
         return (components[0] == "cifar" and
                 components[1] == "graph" and
-                components[2] in ['er', 'ws', 'ba'] and
+                components[2] in ['ER', 'WS', 'BA'] and
                 components[3].isdigit() and
                 isfloat(components[4]) and (0 < float(components[4]) < 1) and
                 components[5].isdigit() and
@@ -110,7 +112,7 @@ class Model(base.Model):
     @staticmethod
     def default_hparams():
         model_hparams = hparams.ModelHparams(
-            model_name='cifar_graph_er_32_0.75_64_1',
+            model_name='cifar_graph_ER_32_0.75_64_1',
             model_init='kaiming_normal',
             batchnorm_init='uniform',
         )
